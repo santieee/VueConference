@@ -12,7 +12,7 @@
           ></div>
           <v-expansion-panels v-if="event.EventSessionModerators.length > 0">
            <v-expansion-panel>
-            <v-expansion-panel-header  class="eventCaption">{{event.Caption}}</v-expansion-panel-header>        
+            <v-expansion-panel-header  class="eventCaption">{{showCaption(event)}}</v-expansion-panel-header>        
               <v-expansion-panel-content>
                 
                 <div class="moderators" v-for="(person,i) in event.EventSessionModerators" :key="i">
@@ -22,7 +22,7 @@
               </v-expansion-panel-content>
             </v-expansion-panel>
           </v-expansion-panels>
-          <div v-else class="eventCaption">{{event.Caption}}</div>
+          <div v-else class="eventCaption">{{ showCaption(event) }}</div>
         </v-timeline-item>
       </v-timeline>
 </template>
@@ -35,6 +35,26 @@ export default {
   props:{
     data: Object,
   },
+  computed:{
+    lang(){
+      return this.$store.state.lang
+    }
+  },
+  methods:{
+    showCaption(event){
+      let caption;
+      if(this.lang){
+        try{
+          caption = event.ObjectDataVersionList[0].Value
+        }catch{
+          caption = event.Caption
+        }
+      }else{
+        caption = event.Caption
+      }
+      return caption;
+    }
+  }
 };
 </script>
 <style scoped type="text/css">

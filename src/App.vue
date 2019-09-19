@@ -21,7 +21,8 @@ export default {
   }),
   methods:{
     showContent(content){
-     this.dayContent = content;
+      console.log(content);
+      this.dayContent = content;
     }
   }
   
