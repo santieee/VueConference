@@ -17,7 +17,7 @@
                 
                 <div class="moderators" v-for="(person,i) in event.EventSessionModerators" :key="i">
                   <div v-if="i == 0"><b>Модераторы:</b></div>
-                  {{person.Person.Caption}}
+                  {{showModerator(person.Person)}}
                 </div>
               </v-expansion-panel-content>
             </v-expansion-panel>
@@ -42,17 +42,29 @@ export default {
   },
   methods:{
     showCaption(event){
-      let caption;
       if(this.lang){
         try{
-          caption = event.ObjectDataVersionList[0].Value
+          return event.ObjectDataVersionList[0].Value
         }catch{
-          caption = event.Caption
+          return event.Caption
         }
       }else{
-        caption = event.Caption
+        return event.Caption
       }
-      return caption;
+    },
+    showModerator(moder){
+      if(this.lang){
+        try{
+          return this.firstUp(moder.ComponentName.split('-').join(' '));
+        }catch{
+          return moder.Caption;
+        }
+      }else{
+        return moder.Caption;
+      }
+    },
+    firstUp(word){
+      return word[0].toUpperCase() + word.substr(1);
     }
   }
 };

@@ -25,7 +25,7 @@ export default {
     showContent(content){
       this.$emit('content', content);
     },
-    setLang(lang){
+    setLang(){
       this.$store.commit('changeLang')
     }
   }
