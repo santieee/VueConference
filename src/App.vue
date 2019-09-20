@@ -9,6 +9,7 @@
 import response from './JSON/response.json';
 import headerCp from './components/conference/header.vue'
 import bodyCp from './components/conference/body.vue'
+
 export default {
   name: 'App',
   components: {
@@ -21,22 +22,32 @@ export default {
   }),
   methods:{
     showContent(content){
-      console.log(content);
       this.dayContent = content;
     }
   }
   
 };
 </script>
-<style type="text/css">
+<style type="scss">
   body{
     display: flex;
     justify-content: center;
+    font-size: 16px;
   }
   #app{
     display: flex;
     width: 80%;
     justify-content: center;
     align-items: center;
+  }
+  @media screen and (min-width: 768px) {
+    #app{
+      width: 80%;
+    }
+  }
+  @media screen and (max-width: 770px) {
+    #app{
+      width: 100%;
+    }
   }
 </style>
